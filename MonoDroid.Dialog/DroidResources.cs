@@ -32,7 +32,16 @@ namespace MonoDroid.Dialog
 
             dialog_textfieldbelow,
             dialog_textfieldright,
+			dialog_progressbar,
+			main
         }
+
+		public static View LoadMainLayout(Context context, View convertView, ViewGroup parent)
+		{
+			ProgressBar bar;
+			View vw = LoadProgressBarLayout(context, convertView, parent, out bar);
+			return vw;
+		}
 
         public static View LoadFloatElementLayout(Context context, View convertView, ViewGroup parent, int layoutId, out TextView label, out SeekBar slider, out ImageView left, out ImageView right)
         {
@@ -103,6 +112,20 @@ namespace MonoDroid.Dialog
             }
             return layout;
         }
+
+		public static View LoadProgressBarLayout(Context context, View convertView, ViewGroup parent, out ProgressBar bar)
+		{
+			View layout = LoadLayout(context, parent, (int)DroidResources.ElementLayout.dialog_progressbar);
+			if (layout != null)
+			{
+				bar = layout.FindViewById<ProgressBar>(context.Resources.GetIdentifier("dialog_progressbar", "id", context.PackageName));
+			}
+			else
+			{
+				bar = null;
+			}
+			return layout;
+		}
 
         public static View LoadButtonLayout(Context context, View convertView, ViewGroup parent, int layoutId, out Button button)
         {
@@ -209,6 +232,7 @@ namespace MonoDroid.Dialog
                 { ElementLayout.dialog_selectlist, "dialog_selectlist"},
                 { ElementLayout.dialog_selectlistfield, "dialog_selectlistfield"},
                 { ElementLayout.dialog_textarea, "dialog_textarea"},
+				{ ElementLayout.dialog_progressbar, "dialog_progressbar"}
             };
         }
     }
